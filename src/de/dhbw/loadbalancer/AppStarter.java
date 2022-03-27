@@ -8,7 +8,7 @@ public class AppStarter {
 	}
 
 	private void start() {
-		
+
 	}
 
 }
