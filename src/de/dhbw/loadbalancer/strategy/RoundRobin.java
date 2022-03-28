@@ -17,7 +17,7 @@ public class RoundRobin<T> {
 		currentIndex = (currentIndex + 1) % list.size();
 		return res;
 	}
-	
+
 	public int size() {
 		return list.size();
 	}

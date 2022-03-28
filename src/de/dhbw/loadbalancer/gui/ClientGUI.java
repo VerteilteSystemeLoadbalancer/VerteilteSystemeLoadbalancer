@@ -6,20 +6,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public class ClientGUI implements StringEvent {
+
+	private final StringEvent stringEvent;
 
 	private JFrame frame;
 	private JTextField inputField;
 	private JTextField fieldResponse;
 
-	private StringEvent stringEvent;
-
-	public ClientGUI(StringEvent stringEvent) {
-		this.stringEvent = stringEvent;
-		initializeGui();
-	}
-
-	private void initializeGui() {
+	public void open() {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setTitle("ClientGUI");

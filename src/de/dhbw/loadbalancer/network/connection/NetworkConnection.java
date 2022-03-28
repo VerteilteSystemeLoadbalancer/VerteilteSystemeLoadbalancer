@@ -3,14 +3,17 @@ package de.dhbw.loadbalancer.network.connection;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.concurrent.CountDownLatch;
 
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 
-@RequiredArgsConstructor
+@NoArgsConstructor
 public abstract class NetworkConnection {
 
-	private final int port;
+	public int getPort() {
+		return socket.getLocalPort();
+	}
 
 	private DatagramSocket socket = null;
 	private Thread listenThread = null;
@@ -22,19 +25,23 @@ public abstract class NetworkConnection {
 		return listenThread;
 	}
 
+	private CountDownLatch blocker = new CountDownLatch(1);
+
+	@SneakyThrows
 	public void runInBackground() {
 		createThread().start();
+		blocker.await();
 	}
 
 	@SneakyThrows
 	private void listen() {
-		socket = new DatagramSocket(port);
+		socket = new DatagramSocket();
+		blocker.countDown();
 		while (true) {
 			byte[] buffer = new byte[500]; // TODO max length
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 			socket.receive(packet);
 			String data = new String(packet.getData(), 0, packet.getLength());
-			System.out.println("IN on port " + port + ": " + data);
 			NetworkAddress sender = new NetworkAddress(packet.getAddress(), packet.getPort());
 			onMessageReceive(data, sender);
 		}

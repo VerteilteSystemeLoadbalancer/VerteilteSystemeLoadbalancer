@@ -5,13 +5,13 @@ import de.dhbw.loadbalancer.network.connection.NetworkConnection;
 
 public class Loadbalancer extends NetworkConnection {
 
-	public Loadbalancer(int port) {
-		super(port);
+	public Loadbalancer() {
+		super();
 	}
 
 	@Override
 	protected void onMessageReceive(String message, NetworkAddress sender) {
-
+		System.out.println("Loadbalancer hat empfangen: " + message);
 	}
 
 }
