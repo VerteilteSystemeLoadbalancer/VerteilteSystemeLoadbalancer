@@ -1,14 +1,8 @@
-package de.dhbw.loadbalancer.strategy;
+package de.dhbw.loadbalancer.strategy.roundrobin;
 
-import java.util.List;
+import de.dhbw.loadbalancer.strategy.BalanceStrategy;
 
-public class RoundRobin<T> {
-
-	private List<T> list;
-
-	public RoundRobin(List<T> list) {
-		this.list = list;
-	}
+public class RoundRobin<T> extends BalanceStrategy<T> {
 
 	private int currentIndex = 0;
 

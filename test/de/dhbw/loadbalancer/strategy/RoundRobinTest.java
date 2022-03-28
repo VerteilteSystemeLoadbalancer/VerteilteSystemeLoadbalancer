@@ -4,11 +4,20 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import de.dhbw.loadbalancer.strategy.roundrobin.RoundRobin;
 
 class RoundRobinTest {
 
-	private RoundRobin<String> roundRobin = new RoundRobin<String>(Arrays.asList("abc", "test", "last"));
+	private RoundRobin<String> roundRobin = new RoundRobin<String>();
+	
+	@BeforeEach
+	void init() {
+		roundRobin.updateList(Arrays.asList("abc", "test", "last"));
+	}
 	
 	@Test
 	void testSize() {

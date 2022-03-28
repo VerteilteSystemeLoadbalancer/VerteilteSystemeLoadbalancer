@@ -11,10 +11,6 @@ import lombok.SneakyThrows;
 @NoArgsConstructor
 public abstract class NetworkConnection {
 
-	public int getPort() {
-		return socket.getLocalPort();
-	}
-
 	private DatagramSocket socket = null;
 	private Thread listenThread = null;
 
@@ -57,5 +53,10 @@ public abstract class NetworkConnection {
 			return false;
 		}
 	}
+	
+	public NetworkAddress toAddress() {
+		return NetworkAddress.local(socket.getLocalPort());
+	}
+	
 
 }

@@ -1,10 +1,8 @@
 package de.dhbw.loadbalancer.network;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import de.dhbw.loadbalancer.network.connection.NetworkAddress;
 import de.dhbw.loadbalancer.network.connection.NetworkConnection;
+import de.dhbw.loadbalancer.strategy.BalanceInterface;
 
 public class Loadbalancer extends NetworkConnection {
 
@@ -17,10 +15,10 @@ public class Loadbalancer extends NetworkConnection {
 		System.out.println("Loadbalancer hat empfangen: " + message);
 	}
 
-	private List<NetworkAddress> calculationServer = new ArrayList<>();
+	private BalanceInterface<NetworkAddress> balancer;
 
-	public void addCalculationServer(NetworkAddress networkAddress) {
-		calculationServer.add(networkAddress);
+	public void setBalancer(BalanceInterface<NetworkAddress> balancer) {
+		this.balancer = balancer;
 	}
 
 }

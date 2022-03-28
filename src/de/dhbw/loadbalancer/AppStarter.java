@@ -11,9 +11,13 @@ import de.dhbw.loadbalancer.network.Client;
 import de.dhbw.loadbalancer.network.Loadbalancer;
 import de.dhbw.loadbalancer.network.connection.NetworkAddress;
 import de.dhbw.loadbalancer.network.connection.NetworkConnection;
+import de.dhbw.loadbalancer.strategy.BalanceStrategy;
+import de.dhbw.loadbalancer.strategy.roundrobin.RoundRobin;
 import lombok.SneakyThrows;
 
 public class AppStarter {
+
+	private static final BalanceStrategy<NetworkAddress> BALANCER = new RoundRobin<NetworkAddress>();
 
 	private static final int AMOUNT_CALCULATIONSERVER = 15;
 	private static final int AMOUNT_LOADBALANCER = 5;
@@ -25,14 +29,11 @@ public class AppStarter {
 
 	private void start() {
 		List<Loadbalancer> loadbalancerList = launch(Loadbalancer.class, AMOUNT_LOADBALANCER);
-		launchClientWithGui(loadbalancerList.stream().map(l -> convertConnectionToAddress(l)).collect(Collectors.toList()));
+		launchClientWithGui(loadbalancerList.stream().map(l -> l.toAddress()).collect(Collectors.toList()));
 
-		List<CalculationServer> calculationserver = launch(CalculationServer.class, AMOUNT_CALCULATIONSERVER);
-		loadbalancerList.stream().forEach(l -> calculationserver.stream().forEach(c -> l.addCalculationServer(convertConnectionToAddress(c))));
-	}
-
-	private NetworkAddress convertConnectionToAddress(NetworkConnection connection) {
-		return NetworkAddress.local(connection.getPort());
+		List<CalculationServer> calculationserverList = launch(CalculationServer.class, AMOUNT_CALCULATIONSERVER);
+		BALANCER.updateList(calculationserverList.stream().map(cs -> cs.toAddress()).collect(Collectors.toList()));
+		loadbalancerList.stream().forEach(l -> l.setBalancer(BALANCER));
 	}
 
 	private ClientGUI gui;
