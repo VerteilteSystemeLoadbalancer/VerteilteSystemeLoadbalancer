@@ -2,6 +2,7 @@ package de.dhbw.loadbalancer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import de.dhbw.loadbalancer.gui.ClientGUI;
 import de.dhbw.loadbalancer.gui.StringEvent;
@@ -23,11 +24,15 @@ public class AppStarter {
 	}
 
 	private void start() {
-		List<NetworkAddress> loadbalancer = launch(Loadbalancer.class, AMOUNT_LOADBALANCER);
-		launchClientWithGui(loadbalancer);
+		List<Loadbalancer> loadbalancerList = launch(Loadbalancer.class, AMOUNT_LOADBALANCER);
+		launchClientWithGui(loadbalancerList.stream().map(l -> convertConnectionToAddress(l)).collect(Collectors.toList()));
 
-		List<NetworkAddress> calculationserver = launch(CalculationServer.class, AMOUNT_CALCULATIONSERVER);
-		loadbalancer.stream().forEach(l -> calculationserver.stream().forEach(c -> l.addCalculationServer(c)));
+		List<CalculationServer> calculationserver = launch(CalculationServer.class, AMOUNT_CALCULATIONSERVER);
+		loadbalancerList.stream().forEach(l -> calculationserver.stream().forEach(c -> l.addCalculationServer(convertConnectionToAddress(c))));
+	}
+
+	private NetworkAddress convertConnectionToAddress(NetworkConnection connection) {
+		return NetworkAddress.local(connection.getPort());
 	}
 
 	private ClientGUI gui;
@@ -41,12 +46,12 @@ public class AppStarter {
 	}
 
 	@SneakyThrows
-	private <T extends NetworkConnection> List<NetworkAddress> launch(Class<T> c, int amount) {
-		List<NetworkAddress> list = new ArrayList<>();
+	private <T extends NetworkConnection> List<T> launch(Class<T> c, int amount) {
+		List<T> list = new ArrayList<>();
 		for (int i = 0; i < amount; i++) {
-			NetworkConnection networkConnection = (NetworkConnection) c.newInstance();
+			T networkConnection = c.newInstance();
 			networkConnection.runInBackground();
-			list.add(NetworkAddress.local(networkConnection.getPort()));
+			list.add(networkConnection);
 		}
 		return list;
 	}
