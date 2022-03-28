@@ -2,7 +2,7 @@ package de.dhbw.loadbalancer.system;
 
 public enum Action {
 
-	CALCULATE;
+	CALCULATE, RESULT;
 
 	@Override
 	public String toString() {
