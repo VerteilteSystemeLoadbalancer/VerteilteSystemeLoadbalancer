@@ -1,4 +1,4 @@
-package de.dhbw.loadbalancer.network.connection;
+package de.dhbw.loadbalancer.network;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -53,10 +53,9 @@ public abstract class NetworkConnection {
 			return false;
 		}
 	}
-	
+
 	public NetworkAddress toAddress() {
 		return NetworkAddress.local(socket.getLocalPort());
 	}
-	
 
 }

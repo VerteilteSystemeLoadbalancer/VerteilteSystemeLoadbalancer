@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 public abstract class BalanceStrategy<T> implements BalanceInterface<T> {
 
 	protected final List<T> list = new ArrayList<>();
-	
+
 	public int size() {
 		return list.size();
 	}
@@ -18,5 +18,5 @@ public abstract class BalanceStrategy<T> implements BalanceInterface<T> {
 		list.clear();
 		list.addAll(newList);
 	}
-	
+
 }

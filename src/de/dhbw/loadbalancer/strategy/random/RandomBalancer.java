@@ -7,9 +7,9 @@ import lombok.AllArgsConstructor;
 public class RandomBalancer<T> extends BalanceStrategy<T> {
 
 	private RandomSupplier randomSupplier;
-	
+
 	public T next() {
-		int randomIndex = randomSupplier.nextRandom(0, list.size()-1);
+		int randomIndex = randomSupplier.nextRandom(0, list.size() - 1);
 		return list.get(randomIndex);
 	}
 

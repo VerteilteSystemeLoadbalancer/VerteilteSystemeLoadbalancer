@@ -6,18 +6,21 @@ import java.util.stream.Collectors;
 
 import de.dhbw.loadbalancer.gui.ClientGUI;
 import de.dhbw.loadbalancer.gui.StringEvent;
-import de.dhbw.loadbalancer.network.CalculationServer;
-import de.dhbw.loadbalancer.network.Client;
-import de.dhbw.loadbalancer.network.Loadbalancer;
-import de.dhbw.loadbalancer.network.connection.NetworkAddress;
-import de.dhbw.loadbalancer.network.connection.NetworkConnection;
+import de.dhbw.loadbalancer.network.NetworkAddress;
+import de.dhbw.loadbalancer.network.NetworkConnection;
 import de.dhbw.loadbalancer.strategy.BalanceStrategy;
+import de.dhbw.loadbalancer.strategy.random.DefaultRandomSupplier;
+import de.dhbw.loadbalancer.strategy.random.RandomBalancer;
 import de.dhbw.loadbalancer.strategy.roundrobin.RoundRobin;
+import de.dhbw.loadbalancer.system.CalculationServer;
+import de.dhbw.loadbalancer.system.Client;
+import de.dhbw.loadbalancer.system.Loadbalancer;
 import lombok.SneakyThrows;
 
 public class AppStarter {
 
-	private static final BalanceStrategy<NetworkAddress> BALANCER = new RoundRobin<NetworkAddress>();
+	private static final BalanceStrategy<NetworkAddress> BALANCER_LOADBALANCER = new RoundRobin<NetworkAddress>();
+	private static final BalanceStrategy<NetworkAddress> BALANCER_CLIENT = new RandomBalancer<NetworkAddress>(new DefaultRandomSupplier());
 
 	private static final int AMOUNT_CALCULATIONSERVER = 15;
 	private static final int AMOUNT_LOADBALANCER = 5;
@@ -32,15 +35,16 @@ public class AppStarter {
 		launchClientWithGui(loadbalancerList.stream().map(l -> l.toAddress()).collect(Collectors.toList()));
 
 		List<CalculationServer> calculationserverList = launch(CalculationServer.class, AMOUNT_CALCULATIONSERVER);
-		BALANCER.updateList(calculationserverList.stream().map(cs -> cs.toAddress()).collect(Collectors.toList()));
-		loadbalancerList.stream().forEach(l -> l.setBalancer(BALANCER));
+		BALANCER_LOADBALANCER.updateList(calculationserverList.stream().map(cs -> cs.toAddress()).collect(Collectors.toList()));
+		loadbalancerList.stream().forEach(l -> l.setBalancer(BALANCER_LOADBALANCER));
 	}
 
 	private ClientGUI gui;
 
 	private void launchClientWithGui(List<NetworkAddress> loadbalancer) {
 		StringEvent outputEvent = data -> gui.onEvent(data);
-		Client client = new Client(loadbalancer, outputEvent);
+		BALANCER_CLIENT.updateList(loadbalancer);
+		Client client = new Client(BALANCER_CLIENT, outputEvent);
 		client.runInBackground();
 		gui = new ClientGUI(data -> client.onEvent(data));
 		gui.open();

@@ -1,7 +1,7 @@
-package de.dhbw.loadbalancer.network;
+package de.dhbw.loadbalancer.system;
 
-import de.dhbw.loadbalancer.network.connection.NetworkAddress;
-import de.dhbw.loadbalancer.network.connection.NetworkConnection;
+import de.dhbw.loadbalancer.network.NetworkAddress;
+import de.dhbw.loadbalancer.network.NetworkConnection;
 
 public class CalculationServer extends NetworkConnection {
 

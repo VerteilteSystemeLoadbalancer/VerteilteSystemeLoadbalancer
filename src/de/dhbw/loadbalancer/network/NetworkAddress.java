@@ -1,4 +1,4 @@
-package de.dhbw.loadbalancer.network.connection;
+package de.dhbw.loadbalancer.network;
 
 import java.net.InetAddress;
 
