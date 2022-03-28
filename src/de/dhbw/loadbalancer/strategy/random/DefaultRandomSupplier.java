@@ -4,7 +4,8 @@ public class DefaultRandomSupplier implements RandomSupplier {
 
 	@Override
 	public int nextRandom(int min, int max) {
-		return (int) (Math.random() * (max - min) + min);
+		max++;
+		return (int) ((Math.random() * (max - min) + min));
 	}
 
 }

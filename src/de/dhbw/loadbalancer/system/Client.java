@@ -4,6 +4,7 @@ import de.dhbw.loadbalancer.gui.StringEvent;
 import de.dhbw.loadbalancer.network.NetworkAddress;
 import de.dhbw.loadbalancer.network.NetworkConnection;
 import de.dhbw.loadbalancer.strategy.BalanceStrategy;
+import de.dhbw.loadbalancer.util.TextUtil;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -26,10 +27,8 @@ public class Client extends NetworkConnection implements StringEvent {
 		send(Action.CALCULATE + " " + prepared, address);
 	}
 
-	private static final String MARKS = "\"";
-
 	private String prepare(String input) {
-		return MARKS + input.replace(MARKS, "") + MARKS;
+		return TextUtil.MARKS + input.replace(TextUtil.MARKS, "") + TextUtil.MARKS;
 	}
 
 }

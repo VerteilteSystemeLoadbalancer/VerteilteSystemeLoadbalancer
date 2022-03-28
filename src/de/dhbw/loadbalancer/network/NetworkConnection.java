@@ -5,11 +5,18 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.concurrent.CountDownLatch;
 
-import lombok.NoArgsConstructor;
+import de.dhbw.loadbalancer.util.TextUtil;
+import lombok.Getter;
 import lombok.SneakyThrows;
 
-@NoArgsConstructor
 public abstract class NetworkConnection {
+
+	@Getter
+	private String id;
+
+	public NetworkConnection() {
+		id = TextUtil.randomString();
+	}
 
 	private DatagramSocket socket = null;
 	private Thread listenThread = null;

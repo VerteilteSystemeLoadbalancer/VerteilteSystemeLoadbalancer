@@ -7,6 +7,7 @@ import java.util.UUID;
 import de.dhbw.loadbalancer.network.NetworkAddress;
 import de.dhbw.loadbalancer.network.NetworkConnection;
 import de.dhbw.loadbalancer.strategy.BalanceInterface;
+import de.dhbw.loadbalancer.util.TextUtil;
 import lombok.Setter;
 
 public class Loadbalancer extends NetworkConnection {
@@ -14,39 +15,40 @@ public class Loadbalancer extends NetworkConnection {
 	@Setter
 	private BalanceInterface<NetworkAddress> balancer;
 
-	public Loadbalancer() {
-		super();
-	}
-
 	@Override
 	protected void onMessageReceive(String message, NetworkAddress sender) {
-		System.out.println("Loadbalancer hat empfangen: " + message);
+		System.out.println("Loadbalancer " + getId() + " hat empfangen: " + message);
 
 		Action action = Action.valueOf(message.split(" ")[0]);
 		if (action == Action.CALCULATE) {
 
 			String text = message.substring(Action.CALCULATE.toString().length()).trim();
-			if (text.startsWith("\"") && text.endsWith("\"")) {
+			if (TextUtil.isStringInMarks(text)) {
 				String uuid = nextUUID(sender);
-				send(Response.WAIT + " " + uuid, sender);
 				send(Action.CALCULATE + " " + uuid + " " + text, balancer.next());
 			} else {
-				send(Response.ERROR.toString(), sender);
+				send(Action.ERROR.toString(), sender);
 			}
 		} else if (action == Action.RESULT) {
-			String uuid = message.split(" ")[1];
-			NetworkAddress address = getByUUID(uuid);
+			NetworkAddress address = getByUUID(message.split(" ")[1], true);
+			send(message, address);
+		} else if (action == Action.WAIT) {
+			NetworkAddress address = getByUUID(message.split(" ")[1], false);
 			send(message, address);
 		} else {
-			send(Response.ERROR + " unknown command", sender);
+			send(Action.ERROR + " unknown command", sender);
 		}
 
 	}
 
 	private Map<String, NetworkAddress> map = new HashMap<>();
 
-	private NetworkAddress getByUUID(String uuid) {
-		return map.get(uuid);
+	private NetworkAddress getByUUID(String uuid, boolean delete) {
+		if (delete) {
+			return map.remove(uuid);
+		} else {
+			return map.get(uuid);
+		}
 	}
 
 	private String nextUUID(NetworkAddress address) {
