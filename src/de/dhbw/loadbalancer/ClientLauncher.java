@@ -21,7 +21,7 @@ public class ClientLauncher {
 		BALANCER_CLIENT.updateList(loadbalancer);
 		Client client = new Client(BALANCER_CLIENT, outputEvent);
 		client.runInBackground();
-		gui = new ClientGUI(data -> client.onEvent(data));
+		gui = new ClientGUI(client.getId(), data -> client.onEvent(data));
 		gui.open();
 	}
 
