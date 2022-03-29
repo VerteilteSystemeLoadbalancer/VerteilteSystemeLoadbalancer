@@ -1,4 +1,7 @@
 # VerteilteSystemeLoadbalancer
 
+## Skizze / Projektidee
+![skizze](skizze.png)
 
-![alt text](skizze.png)
+## Ablauf Berechnung
+![ablauf](ablauf.png)
