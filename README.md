@@ -15,7 +15,7 @@ Voraussetzung:
 
 Anforderungen:
 - Programmiersprache Java
-- Strategien: Round Robin & zufällige Zuweisung
+- Strategien: [Round Robin](src/de/dhbw/loadbalancer/strategy/roundrobin/RoundRobin.java) & [zufällige Zuweisung](src/de/dhbw/loadbalancer/strategy/random/RandomBalancer.java)
 - 3 Anwendungen: [Client](src/de/dhbw/loadbalancer/system/Client.java), [Loadbalancer](src/de/dhbw/loadbalancer/system/Loadbalancer.java), [CalculationServer](src/de/dhbw/loadbalancer/system/CalculationServer.java)
 
 <br/>
@@ -28,11 +28,12 @@ Zu Demozwecken laufen alle Systeme auf dem gleichen Computer. Es stellt allerdin
 <img src="skizze.png" alt="skizze" width="500"/>
 <br/><br/>
 
-## Ablauf Berechnung
+## Ablauf Berechnung: Skizze
 In der Skizze ist der Ablauf einer Anfrage über alle 3 Anwendungen abgebildet.
 <img src="ablauf.png" alt="ablauf" width="500"/>
+<br/><br/>
 
-
+## Ablauf Berechnung: Log
 ```
 Client JNKAB sendet: CALCULATE "TestString"
 ```
@@ -96,6 +97,7 @@ Client JNKAB hat empfangen: RESULT 92df2134 "a4525e5c..."
 Client empfängt das Ergebnis
 <br/><br/><br/>
 
+## Ablauf Berechnung: Screenshots
 <img src="screenshots/1.png" alt="1" width="750"/>
 <img src="screenshots/2.png" alt="2" width="750"/>
 <img src="screenshots/3.png" alt="3" width="750"/>
