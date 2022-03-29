@@ -11,15 +11,13 @@ public class CalculationServer extends NetworkConnection {
 
 	private Queue<PendingCalculation> queue = new Queue<>();
 
-	private Thread thread;
-
 	public CalculationServer() {
 		super();
 		launchQueue();
 	}
 
 	private void launchQueue() {
-		thread = new Thread(() -> {
+		Thread thread = new Thread(() -> {
 			while (!Thread.interrupted()) {
 				PendingCalculation next = queue.next();
 				String result = next.execute();

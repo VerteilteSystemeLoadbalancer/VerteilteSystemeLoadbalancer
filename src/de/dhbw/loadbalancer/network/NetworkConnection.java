@@ -19,12 +19,11 @@ public abstract class NetworkConnection {
 	}
 
 	private DatagramSocket socket = null;
-	private Thread listenThread = null;
 
 	protected abstract void onMessageReceive(String message, NetworkAddress sender);
 
 	private Thread createThread() {
-		listenThread = new Thread(() -> listen());
+		Thread listenThread = new Thread(() -> listen());
 		return listenThread;
 	}
 

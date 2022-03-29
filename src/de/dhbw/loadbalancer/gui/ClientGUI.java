@@ -17,7 +17,6 @@ public class ClientGUI implements StringEvent {
 
 	private final StringEvent inputEvent;
 
-	private JFrame frame;
 	private JTextField inputField;
 	private JTextField fieldResponse;
 
@@ -25,7 +24,7 @@ public class ClientGUI implements StringEvent {
 	 * @wbp.parser.entryPoint
 	 */
 	public void open() {
-		frame = new JFrame();
+		JFrame frame = new JFrame();
 		frame.setResizable(false);
 		frame.setTitle("ClientGUI " + name);
 		frame.setBounds(100, 230, 1250, 144);
