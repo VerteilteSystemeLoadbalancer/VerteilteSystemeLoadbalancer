@@ -26,6 +26,7 @@ Zu Demozwecken laufen alle Systeme auf dem gleichen Computer. Es stellt allerdin
 
 ## Übersicht
 <img src="skizze.png" alt="skizze" width="500"/>
+<br/><br/>
 
 ## Ablauf Berechnung
 In der Skizze ist der Ablauf einer Anfrage über alle 3 Anwendungen abgebildet.
@@ -93,13 +94,19 @@ Loadbalancer leitet das Ergebnis an den Client weiter
 Client JNKAB hat empfangen: RESULT 92df2134 "a4525e5c..."
 ```
 Client empfängt das Ergebnis
-<br/><br/>
+<br/><br/><br/>
 
+<img src="screenshots/1.png" alt="1" width="750"/>
+<img src="screenshots/2.png" alt="2" width="750"/>
+<img src="screenshots/3.png" alt="3" width="750"/>
+<img src="screenshots/4.png" alt="4" width="750"/>
+<br/><br/>
 
 ## Queue-Thread
 In der folgenden Skizze ist der Ablauf der [Queue](src/de/dhbw/loadbalancer/system/queue/Queue.java) eines CalculationServer.
 <br/><br/>
 <img src="queue.png" alt="queue" width="200"/>
+<br/><br/>
 
 ## Tests
 Einige Aspekte der Software wurden mit Unit-Tests getestet: [\*klick\*](test/de/dhbw/loadbalancer)
