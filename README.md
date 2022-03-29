@@ -100,3 +100,6 @@ Client empfängt das Ergebnis
 In der folgenden Skizze ist der Ablauf der [Queue](src/de/dhbw/loadbalancer/system/queue/Queue.java) eines CalculationServer.
 <br/><br/>
 <img src="queue.png" alt="queue" width="200"/>
+
+## Tests
+Einige Aspekte der Software wurden mit Unit-Tests getestet: [\*klick\*](test/de/dhbw/loadbalancer)
