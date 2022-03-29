@@ -31,6 +31,71 @@ Zu Demozwecken laufen alle Systeme auf dem gleichen Computer. Es stellt allerdin
 In der Skizze ist der Ablauf einer Anfrage über alle 3 Anwendungen abgebildet.
 <img src="ablauf.png" alt="ablauf" width="500"/>
 
+
+```
+Client JNKAB sendet: CALCULATE "TestString"
+```
+Client sendet die Anfrage an einen Loadbalancer
+<br/><br/>
+```
+Loadbalancer GITMV hat empfangen: CALCULATE "TestString"
+```
+Loadbalancer empfängt die Anfrage
+<br/><br/>
+```
+Loadbalancer GITMV sendet: CALCULATE 92df2134 "TestString"
+```
+Loadbalancer erzeugt eine Session und leitet die Anfrage an einen CalculationServer weiter
+<br/><br/>
+```
+CalculationServer ENOQX hat empfangen: CALCULATE 92df2134 "TestString"
+```
+CalculationServer empfängt die Anfrage und reiht diese in die Warteschlange ein
+<br/><br/>
+```
+CalculationServer ENOQX sendet: WAIT 92df2134 1
+```
+CalculationServer sendet aktuelle Position der Warteschlange an den Loadbalancer zurück
+<br/><br/>
+```
+Loadbalancer GITMV hat empfangen: WAIT 92df2134 1
+```
+Loadbalancer empfängt die aktuelle Position in der Warteschlange
+<br/><br/>
+```
+Loadbalancer GITMV sendet: WAIT 92df2134 1
+```
+Loadbalancer leitet die aktuelle Position in der Warteschlange an den Client weiter
+<br/><br/>
+```
+Client JNKAB hat empfangen: WAIT 92df2134 1
+```
+Client empfängt die aktuelle Position in der Warteschlange
+<br/><br/><br/>
+... etwa 10 Sekunden später ...
+<br/><br/>
+```
+CalculationServer ENOQX sendet: RESULT 92df2134 "a4525e5c..."
+```
+CalculationServer ist mit der Berechnung fertig und sendet das Ergebnis an den Loadbalancer
+<br/><br/>
+```
+Loadbalancer GITMV hat empfangen: RESULT 92df2134 "a4525e5c..."
+```
+Loadbalancer empfängt das Ergebnis
+<br/><br/>
+```
+Loadbalancer GITMV sendet: RESULT 92df2134 "a4525e5c..."
+```
+Loadbalancer leitet das Ergebnis an den Client weiter
+<br/><br/>
+```
+Client JNKAB hat empfangen: RESULT 92df2134 "a4525e5c..."
+```
+Client empfängt das Ergebnis
+<br/><br/>
+
+
 ## Queue-Thread
 In der folgenden Skizze ist der Ablauf der [Queue](src/de/dhbw/loadbalancer/system/queue/Queue.java) eines CalculationServer.
 <br/><br/>
