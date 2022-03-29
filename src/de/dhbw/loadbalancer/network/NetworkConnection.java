@@ -52,6 +52,7 @@ public abstract class NetworkConnection {
 	}
 
 	public boolean send(String message, NetworkAddress receiver) {
+		System.out.println(getClass().getSimpleName() + " " + getId() + " sendet: " + message);
 		DatagramPacket packet = new DatagramPacket(message.getBytes(), message.getBytes().length, receiver.getAddress(), receiver.getPort());
 		try {
 			socket.send(packet);
