@@ -1,7 +1,10 @@
 # VerteilteSystemeLoadbalancer
 
 ## Skizze / Projektidee
-![skizze](skizze.png)
+<img src="skizze.png" alt="skizze" width="500"/>
 
 ## Ablauf Berechnung
-![ablauf](ablauf.png)
+<img src="ablauf.png" alt="ablauf" width="500"/>
+
+## Queue-Thread
+<img src="queue.png" alt="queue" width="200"/>
