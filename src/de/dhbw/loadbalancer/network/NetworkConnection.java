@@ -41,17 +41,18 @@ public abstract class NetworkConnection {
 		socket = new DatagramSocket();
 		blocker.countDown();
 		while (true) {
-			byte[] buffer = new byte[500]; // TODO max length
+			byte[] buffer = new byte[500];
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 			socket.receive(packet);
 			String data = new String(packet.getData(), 0, packet.getLength());
 			NetworkAddress sender = new NetworkAddress(packet.getAddress(), packet.getPort());
+			System.out.println(getClass().getSimpleName() + " " + getId() + " hat empfangen: " + data);
 			onMessageReceive(data, sender);
 		}
 	}
 
 	public boolean send(String message, NetworkAddress receiver) {
-		DatagramPacket packet = new DatagramPacket(message.getBytes(), message.getBytes().length, receiver.getAddress(), receiver.getPort()); // Erzeugen eines Datagram Packets
+		DatagramPacket packet = new DatagramPacket(message.getBytes(), message.getBytes().length, receiver.getAddress(), receiver.getPort());
 		try {
 			socket.send(packet);
 			return true;

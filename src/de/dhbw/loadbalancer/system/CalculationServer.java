@@ -32,8 +32,6 @@ public class CalculationServer extends NetworkConnection {
 
 	@Override
 	protected void onMessageReceive(String message, NetworkAddress sender) {
-		System.out.println("CalculationServer " + getId() + " hat empfangen: " + message);
-
 		String split[] = message.split(" ");
 		Action action = Action.valueOf(split[0]);
 
@@ -53,7 +51,6 @@ public class CalculationServer extends NetworkConnection {
 		} else {
 			send(Action.ERROR + " unknown command", sender);
 		}
-
 	}
 
 	private static final int REPEAT = 10000000;

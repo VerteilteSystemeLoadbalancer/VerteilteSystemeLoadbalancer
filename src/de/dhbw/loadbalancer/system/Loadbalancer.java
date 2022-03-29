@@ -17,11 +17,8 @@ public class Loadbalancer extends NetworkConnection {
 
 	@Override
 	protected void onMessageReceive(String message, NetworkAddress sender) {
-		System.out.println("Loadbalancer " + getId() + " hat empfangen: " + message);
-
 		Action action = Action.valueOf(message.split(" ")[0]);
 		if (action == Action.CALCULATE) {
-
 			String text = message.substring(Action.CALCULATE.toString().length()).trim();
 			if (TextUtil.isStringInMarks(text)) {
 				String uuid = nextUUID(sender);
@@ -38,7 +35,6 @@ public class Loadbalancer extends NetworkConnection {
 		} else {
 			send(Action.ERROR + " unknown command", sender);
 		}
-
 	}
 
 	private Map<String, NetworkAddress> map = new HashMap<>();

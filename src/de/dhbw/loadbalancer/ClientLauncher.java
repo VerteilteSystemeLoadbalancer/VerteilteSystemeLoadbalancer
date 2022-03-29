@@ -12,7 +12,7 @@ import de.dhbw.loadbalancer.system.Client;
 
 public class ClientLauncher {
 
-	private static final BalanceStrategy<NetworkAddress> BALANCER_CLIENT = new RandomBalancer<NetworkAddress>(new DefaultRandomSupplier());
+	private final BalanceStrategy<NetworkAddress> BALANCER_CLIENT = new RandomBalancer<NetworkAddress>(new DefaultRandomSupplier());
 
 	private ClientGUI gui;
 

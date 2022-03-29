@@ -21,9 +21,7 @@ public class Client extends NetworkConnection implements StringEvent {
 	@Override
 	public void onEvent(String data) {
 		NetworkAddress address = loadbalancer.next();
-
 		String prepared = prepare(data);
-
 		send(Action.CALCULATE + " " + prepared, address);
 	}
 
