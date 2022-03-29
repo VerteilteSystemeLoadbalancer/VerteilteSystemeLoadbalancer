@@ -1,5 +1,7 @@
 # VerteilteSystemeLoadbalancer
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a63eda1ced3343e189e3347488fb1893)](https://www.codacy.com/gh/VerteilteSystemeLoadbalancer/VerteilteSystemeLoadbalancer/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=VerteilteSystemeLoadbalancer/VerteilteSystemeLoadbalancer&amp;utm_campaign=Badge_Grade)
+
 Kurzbeschreibung:
 - Client kann eine Berechnung (10.000.000 mal SHA256) anfordern
 - Client wählt durch Zufall einen Loadbalancer aus und schickt die Anforderung an ihn
