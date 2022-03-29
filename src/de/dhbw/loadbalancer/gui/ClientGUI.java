@@ -8,8 +8,11 @@ import javax.swing.JTextField;
 
 public class ClientGUI implements StringEvent {
 
-	public ClientGUI(StringEvent inputEvent) {
+	private String name;
+
+	public ClientGUI(String name, StringEvent inputEvent) {
 		this.inputEvent = inputEvent;
+		this.name = name;
 	}
 
 	private final StringEvent inputEvent;
@@ -24,7 +27,7 @@ public class ClientGUI implements StringEvent {
 	public void open() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setTitle("ClientGUI");
+		frame.setTitle("ClientGUI " + name);
 		frame.setBounds(100, 230, 1250, 144);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
