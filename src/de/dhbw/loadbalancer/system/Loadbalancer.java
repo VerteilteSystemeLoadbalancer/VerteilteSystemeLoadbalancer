@@ -32,8 +32,6 @@ public class Loadbalancer extends NetworkConnection {
 		} else if (action == Action.WAIT) {
 			NetworkAddress address = getByUUID(message.split(" ")[1], false);
 			send(message, address);
-		} else {
-			send(Action.ERROR + " unknown command", sender);
 		}
 	}
 

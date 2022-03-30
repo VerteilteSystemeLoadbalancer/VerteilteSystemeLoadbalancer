@@ -21,7 +21,6 @@ public class CalculationServer extends NetworkConnection {
 			while (!Thread.interrupted()) {
 				PendingCalculation next = queue.next();
 				String result = next.execute();
-
 				send(Action.RESULT + " " + next.getUuid() + " " + TextUtil.putStringInMarks(result), next.getSender());
 			}
 		});
@@ -45,9 +44,6 @@ public class CalculationServer extends NetworkConnection {
 			} else {
 				send(Action.ERROR.toString(), sender);
 			}
-
-		} else {
-			send(Action.ERROR + " unknown command", sender);
 		}
 	}
 
