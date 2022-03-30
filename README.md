@@ -1,6 +1,8 @@
 # VerteilteSystemeLoadbalancer
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a63eda1ced3343e189e3347488fb1893)](https://www.codacy.com/gh/VerteilteSystemeLoadbalancer/VerteilteSystemeLoadbalancer/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=VerteilteSystemeLoadbalancer/VerteilteSystemeLoadbalancer&amp;utm_campaign=Badge_Grade)
+![Codacy Badge](https://app.codacy.com/project/badge/Grade/a63eda1ced3343e189e3347488fb1893)
+![Test Badge](https://github.com/VerteilteSystemeLoadbalancer/VerteilteSystemeLoadbalancer/workflows/tests/badge.svg)
+
 
 Kurzbeschreibung:
 - Client kann eine Berechnung (10.000.000 mal SHA256) anfordern
@@ -113,4 +115,6 @@ In der folgenden Skizze ist der Ablauf der [Queue](src/de/dhbw/loadbalancer/syst
 <br/><br/>
 
 ## Tests
-Einige Aspekte der Software wurden mit Unit-Tests getestet: [\*klick\*](test/de/dhbw/loadbalancer)
+![Test Badge](https://github.com/VerteilteSystemeLoadbalancer/VerteilteSystemeLoadbalancer/workflows/tests/badge.svg)
+<br/>
+Die Software wird bei Änderungen automatisch mit Unit-Tests getestet: [\*klick\*](test/de/dhbw/loadbalancer)
