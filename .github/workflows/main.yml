@@ -4,17 +4,19 @@ jobs:
   run_tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the repository
+      - name: checkput
         uses: actions/checkout@v2
-      - name: Set up JDK 14
+      - name: setup JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 14
-      - name: Cache Maven packages
+          java-version: 8
+      - name: cache maven
         uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Run tests with Maven
-        run: mvn -B test --file pom.xml
+        run: |
+          ls
+          mvn -B test --file pom.xml
