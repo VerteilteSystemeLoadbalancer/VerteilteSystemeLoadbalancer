@@ -34,6 +34,7 @@ Zu Demozwecken laufen alle Systeme auf dem gleichen Computer. Es stellt allerdin
 
 ## Ablauf Berechnung: Skizze
 In der Skizze ist der Ablauf einer Anfrage über alle 3 Anwendungen abgebildet.
+<br/><br/>
 <img src="ablauf.png" alt="ablauf" width="500"/>
 <br/><br/>
 
@@ -106,6 +107,18 @@ Client empfängt das Ergebnis
 <img src="screenshots/2.png" alt="2" width="750"/>
 <img src="screenshots/3.png" alt="3" width="750"/>
 <img src="screenshots/4.png" alt="4" width="750"/>
+<br/><br/>
+
+##Auswahl: Loadbalancer
+Ein zufälliger Loadbalancer übernimmt eine Anfrage des Clients.
+<br/><br/>
+<img src="random.png" alt="reandom loadbalancer" width="500"/>
+<br/><br/>
+
+##Auswahl: Berechnungsserver
+Ein Server wird mittels Round-Robin-Verfahrens ausgewält. 
+<br/><br/>
+<img src="round_robin.png" alt="round robin server" width="500"/>
 <br/><br/>
 
 ## Queue-Thread
