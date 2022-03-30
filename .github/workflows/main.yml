@@ -4,12 +4,12 @@ jobs:
   run_tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the repository
+      - name: checkput
         uses: actions/checkout@v2
-      - name: Set up JDK 14
+      - name: setup JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 14
+          java-version: 8
       - name: Run tests with Maven
         run: |
           ls
