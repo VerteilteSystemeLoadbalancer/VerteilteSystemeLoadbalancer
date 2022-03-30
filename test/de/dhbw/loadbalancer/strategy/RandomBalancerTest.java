@@ -5,28 +5,28 @@ import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import de.dhbw.loadbalancer.strategy.random.RandomBalancer;
 
-class RandomBalancerTest {
+public class RandomBalancerTest {
 
 	private int nextMockedRandom = 1;
 	private RandomBalancer<String> randomBalancer = new RandomBalancer<String>((min, max) -> nextMockedRandom);
-	
-	@BeforeEach
+
+	@Before
 	public void setup() {
 		randomBalancer.updateList(Arrays.asList("abc", "test", "last"));
 	}
-	
+
 	@Test
-	void testSize() {
+	public void testSize() {
 		assertThat(randomBalancer.size(), is(3));
 	}
-	
+
 	@Test
-	void testNext() {
+	public void testNext() {
 		nextMockedRandom = 0;
 		assertThat(randomBalancer.next(), is("abc"));
 		nextMockedRandom = 1;
