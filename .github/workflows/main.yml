@@ -11,4 +11,6 @@ jobs:
         with:
           java-version: 14
       - name: Run tests with Maven
-        run: mvn test
+        run: |
+          ls
+          mvn test
