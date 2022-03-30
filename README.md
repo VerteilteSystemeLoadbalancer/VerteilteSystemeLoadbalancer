@@ -109,13 +109,13 @@ Client empfängt das Ergebnis
 <img src="screenshots/4.png" alt="4" width="750"/>
 <br/><br/>
 
-##Auswahl: Loadbalancer
+## Auswahl: Loadbalancer
 Ein zufälliger Loadbalancer übernimmt eine Anfrage des Clients.
 <br/><br/>
 <img src="random.png" alt="reandom loadbalancer" width="500"/>
 <br/><br/>
 
-##Auswahl: Berechnungsserver
+## Auswahl: Berechnungsserver
 Ein Server wird mittels Round-Robin-Verfahrens ausgewält. 
 <br/><br/>
 <img src="round_robin.png" alt="round robin server" width="500"/>
