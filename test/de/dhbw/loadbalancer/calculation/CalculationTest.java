@@ -20,6 +20,12 @@ public class CalculationTest {
 		Calculation calculation = new Calculation("test", 1);
 		assertThat(calculation.calculate(), is("9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"));
 	}
+	
+	@Test
+	public void testOneTimeOtherString() {
+		Calculation calculation = new Calculation("other_string", 1);
+		assertThat(calculation.calculate(), is("05cff029e39a587a11fecadabe35b1c604690a9cfe8b892eb2d5306b42d54b6f"));
+	}
 
 	@Test
 	public void testTwice() {
